@@ -1,6 +1,7 @@
 package com.BHC.TRAVEL.HYEN_SHAN.USER;
 
 import com.BHC.TRAVEL.HYEN_SHAN.USER.MODEL.USER;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -24,15 +25,12 @@ public class UserController {
     ObjectMapper objectMapper = new ObjectMapper();
     @ResponseBody
     @GetMapping("test")
-    public HashMap<String,HashMap> mapping_Test(){
-        HashMap<String,HashMap> test = new HashMap<>();
-        HashMap<String,String> UserProperty = new HashMap<>();
-        USER user = USER.builder().ID("van133").password("ttink1245!").nickname("샨").build();
+    public String mapping_Test() throws JsonProcessingException {
+        USER user = USER.builder().ID("van123").password("ttink1245!").nickname("샨").build();
         mongoTemplate.insert(user);
-        UserProperty.put("sdf","sdf");
+        String tempText = objectMapper.writeValueAsString(user);
         System.out.println("TEST");
-        test.put("Sdfsdf",UserProperty);
-        return test;
+        return tempText;
     }
 
 }

@@ -1,10 +1,8 @@
 package com.BHC.TRAVEL.HYEN_SHAN.USER.MODEL;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
@@ -12,11 +10,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Document(collection = "USER")
 public class USER {
+
+    @Transient
+    public static final String SEQUENCE_NAME = "SEQUENCE";
     @Id
-    private int useridx;
+    private String _id;
     private String ID;
     private String password;
     private String nickname;
+
 
     @Builder
     public USER(String ID, String password, String nickname){
@@ -24,4 +26,10 @@ public class USER {
         this.password = password;
         this.nickname = nickname;
     }
+
+
+    public USER() {
+
+    }
+
 }
